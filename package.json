@@ -1,0 +1,24 @@
+{
+  "name": "proyecto-js---coderhouse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "proyecto.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "sass scss/origen.scss css/style.css","watch-css": "nodemon -e scss -x \"npm run build-css\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanezek/cursojs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivanezek/cursojs/issues"
+  },
+  "homepage": "https://github.com/ivanezek/cursojs#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "sass": "^1.50.0"
+  }
+}

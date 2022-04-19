@@ -1,0 +1,31 @@
+#productos{
+    display: flex;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    div{
+        .item-img{
+            text-align: center;
+            img{
+                height: 180px;
+                width: auto;
+            }
+        }
+        .item-name{
+            text-align: center;
+            h2{
+                font-size: 1rem;
+                font-weight: 400;
+                margin-bottom: 0px;
+            }
+        }
+        .item-price{
+            text-align: center;
+            p{
+                font-size: 1rem;
+                font-weight: bold;
+            }
+        }
+    }
+}

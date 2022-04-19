@@ -1,13 +1,31 @@
 // PRODUCTOS
 const listaProductos = [
-    {name: "FIFA 22", price: 50},
-    {name: "Resident Evil: Village", price: 45},
-    {name: "Red Dead Redemption", price: 30},
-    {name: "Batman: Arkham Knight", price: 25},
-    {name: "Assassins Creed 3", price: 15},
-    {name: "The Last Of Us: Part 2", price: 55},
-    {name: "Lego Star Wars: Skywalker Saga", price: 70}
+    {id: 1,name: "FIFA 22", price: 50, img: 'https://m.media-amazon.com/images/I/61Kda+eUmlL._SL1000_.jpg'},
+    {id: 2, name: "Resident Evil: Village", price: 45, img: 'https://juegosdigitalesargentina.com/files/images/productos/1622556819-resident-evil-village-ps4.jpg'},
+    {id: 3, name: "Red Dead Redemption", price: 30, img: 'https://http2.mlstatic.com/D_NQ_NP_860292-MLA49256116435_032022-V.jpg'},
+    {id: 4, name: "Batman: Arkham Knight", price: 25, img: 'https://playtecgames.com/wp-content/uploads/2020/01/batman-arkham-knight-ps4_3.jpg'},
+    {id: 5, name: "Assassins Creed 3", price: 15, img: 'https://m.media-amazon.com/images/I/81SewA0-8vS._SX425_.jpg'},
+    {id: 6, name: "The Last Of Us: Part 2", price: 55, img: 'https://i.3djuegos.com/juegos/14236/the_last_of_us_2/fotos/ficha/the_last_of_us_2-4977781.jpg'},
+    {id: 7, name: "Lego Star Wars: Skywalker Saga", price: 70, img: 'https://gameplanet-53f8.kxcdn.com/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/l/e/lego-skywalker-saga-ps4.jpg'}
 ]
+
+const catalogo = document.getElementById('productos')
+for(const producto of listaProductos) {
+    const div = document.createElement('div')
+    div.innerHTML = `
+        <div class="item-img">
+            <img src='${producto.img}'>
+        </div>
+        <div class="item-name">
+            <h2>${producto.name}</h2>
+        </div>
+        <div class="item-price">
+            <p class='precios'> $ ${producto.price}</p>
+        </div> 
+    `
+    catalogo.appendChild(div)
+}
+
 
 //herramientas
 const suma = (a, b) => a + b
@@ -35,7 +53,8 @@ console.log(listaProductos) */
 listaProductos.forEach((prod) => console.log(prod))
 
 // ELECCIÓN DEL PRODUCTO y COMPRA
-let eleccionJuegos = prompt("Ingrese su opción escribiendo el numero: " + "1-FIFA 22 | 2-Resident Evil: Village | 3-Red Dead Redemption | 4- Batman: Arkham Knight | 5- Assasins Creed 3 | 6- The Last Of Us: Part 2 | 7- Lego Star Wars: Skywalker Saga | 8- Salir")
+
+/* let eleccionJuegos = prompt("Ingrese su opción escribiendo el numero: " + "1-FIFA 22 | 2-Resident Evil: Village | 3-Red Dead Redemption | 4- Batman: Arkham Knight | 5- Assasins Creed 3 | 6- The Last Of Us: Part 2 | 7- Lego Star Wars: Skywalker Saga | 8- Salir")
 
 switch (eleccionJuegos) {
     case "1":
@@ -217,3 +236,5 @@ switch (eleccionJuegos) {
             let salir = prompt("Desea abandonar el carrito ?" + " Escriba: Y para salir").toLowerCase()
             if (salir = 'y') {}
     }
+
+    */
