@@ -2,23 +2,24 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-main h1, main h2 {
+.encabezado {
   text-align: center;
 }
 
+.aside_bar {
+  background-color: red;
+}
+
 #productos {
-  display: flex;
-  flex-wrap: wrap;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 #productos div .item-img {
   text-align: center;
 }
 #productos div .item-img img {
-  height: 180px;
-  width: auto;
+  height: 230px;
+  width: 180px;
 }
 #productos div .item-name {
   text-align: center;
@@ -35,5 +36,10 @@ main h1, main h2 {
   font-size: 1rem;
   font-weight: bold;
 }
+
+/* #productos{
+
+
+*/
 
 /*# sourceMappingURL=style.css.map */

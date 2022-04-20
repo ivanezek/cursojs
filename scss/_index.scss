@@ -1,15 +1,20 @@
-#productos{
-    display: flex;
-    flex-wrap: wrap;
+.encabezado{
+    text-align: center;
+}
+
+
+.aside_bar{ 
+    background-color: red;
+}
+#productos { 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     div{
         .item-img{
             text-align: center;
             img{
-                height: 180px;
-                width: auto;
+                height: 230px;
+                width: 180px;
             }
         }
         .item-name{
@@ -29,3 +34,8 @@
         }
     }
 }
+
+/* #productos{
+
+    
+*/
