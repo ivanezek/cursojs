@@ -11,8 +11,10 @@ body {
 }
 
 #productos {
+  margin-bottom: 30%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
 }
 #productos div .item-img {
   text-align: center;
@@ -35,6 +37,10 @@ body {
 #productos div .item-price p {
   font-size: 1rem;
   font-weight: bold;
+  margin-bottom: 0;
+}
+#productos div .item-button {
+  text-align: center;
 }
 
 /* #productos{
