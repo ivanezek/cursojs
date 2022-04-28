@@ -1,3 +1,100 @@
 body{
     font-family: 'Montserrat', sans-serif;
 }
+
+*{
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.linkStyle{
+    color: $blackTitle;
+    text-decoration: none;
+    &:hover{
+        background-color: rgb(94, 3, 3);
+        color: $colorbar;
+    }
+}
+
+
+// NAVBAR
+header{
+    margin-bottom: 50px;
+}
+nav{
+    background-color: $colorbar;
+}
+.navbar-brand{
+    font-weight: bold;
+}
+
+.nav-item{
+    &:hover{
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+
+    }
+}
+
+// FOOTER
+footer {
+    word-spacing: 10px;
+    text-align: center;
+    background-color: $colorbar;
+    color: $blackTitle;
+}
+.encabezadoFooter{
+        margin-top: 20px;
+}
+
+//MAPS
+$redes:(
+    linkedin: #0e76a8,
+    github: #6cc644,
+    instagram: #c13584,
+    youtube: red,
+    facebook-f:blue,
+    twitter:#00acee,
+    google-plus-g:orange,
+);
+
+@each $red, $color in $redes{
+    .fa-#{$red}{
+        color: $blackTitle;
+        &:hover{
+            color: $color;
+        }
+    }
+}
+
+i{
+    padding-right: 10px;
+}
+
+#footerDos{
+    ul{
+        li{
+            list-style: none;
+        }
+    }
+}
+#footerTres{
+    ul{
+        li{
+            list-style: none;
+            a{
+                i{
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+}
+.derechosReservados{
+    margin: 0;
+    p{
+        color: $blackTitle;
+    }
+}

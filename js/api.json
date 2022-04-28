@@ -1,0 +1,10 @@
+[
+    {"id": 1, "name": "Assassins Creed: Origins", "price": 6900, "img": "assets/ac_origins.jpg"},
+    {"id": 2, "name": "Resident Evil: Biohazard", "price": 2800, "img": "assets/re7.jpg"},
+    {"id": 3, "name": "Red Dead Redemption", "price": 1500, "img": "assets/rdr.jpg"},
+    {"id": 4, "name": "Batman: Arkham Knight", "price": 1200, "img": "assets/batman_arkham.jpg"},
+    {"id": 5, "name": "FIFA 22", "price": 7500, "img": "assets/fifa.jpg"},
+    {"id": 6, "name": "The Last Of Us: Part 2", "price": 1300, "img": "assets/tlou_2.png"},
+    {"id": 7, "name": "Cyberpunk 2077", "price": 6000, "img": "assets/cyberp.jpg"},
+    {"id": 8, "name": "NBA 2k19", "price": 900, "img": "assets/nba.jpg"}
+]
