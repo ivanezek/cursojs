@@ -45,7 +45,7 @@
             text-align: center;
             img{
                 height: 230px;
-                width: 100%;
+                width: 165px;
             }
         }
         .item-name{
@@ -76,6 +76,13 @@
 }
 
 // CARRITO
+.shopping-cart-item{
+    .shoppingCartItemTitle{
+        margin-left: $medium;
+        font-weight: bold;
+    }
+}
+
 .shopping-cart-items {
     padding: 20px 0px;
   }
@@ -98,4 +105,11 @@
   
   .shopping-cart-total {
     min-height: 96px;
+    .shoppingCartTotal{
+        font-weight: bold;
+        margin-left: $small;
+    }
+    .botonComprar{
+        margin-left: $medium;
+    }
   }

@@ -169,7 +169,7 @@ i {
 }
 #productos .item .item-img img {
   height: 230px;
-  width: 100%;
+  width: 165px;
 }
 #productos .item .item-name {
   text-align: center;
@@ -196,6 +196,11 @@ i {
   margin-bottom: 8px;
 }
 
+.shopping-cart-item .shoppingCartItemTitle {
+  margin-left: 16px;
+  font-weight: bold;
+}
+
 .shopping-cart-items {
   padding: 20px 0px;
 }
@@ -218,6 +223,13 @@ i {
 
 .shopping-cart-total {
   min-height: 96px;
+}
+.shopping-cart-total .shoppingCartTotal {
+  font-weight: bold;
+  margin-left: 8px;
+}
+.shopping-cart-total .botonComprar {
+  margin-left: 16px;
 }
 
 /*# sourceMappingURL=style.css.map */

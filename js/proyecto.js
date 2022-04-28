@@ -31,6 +31,7 @@ guardarLocal("listaProductos", JSON.stringify(listaProductos));
 	// param divProductos es el id del html donde se va a dibujar la grilla
 function render(aProductos, divProductos) {	
 	const catalogo = document.getElementById(divProductos)
+    catalogo.innerHTML = '';
 
 	for(const producto of aProductos) {
 		const div = document.createElement('div')
@@ -43,10 +44,10 @@ function render(aProductos, divProductos) {
 				<h2 class="name">${producto.name}</h2>
 			</div>
 			<div class="item-price">
-			    <p class='precios'> $ ${producto.price}</p>
+			    <p class='precios'>${producto.price} ARS</p>
 			</div>
 			<div class="item-button">
-				<button class='btn btn-dark botonCarrito' id='idJuego-${producto.id}'>Añadir al carrito</button>   
+				<button class='btn btn-dark botonCarrito' id='idJuego-${producto.id}' onclick="addToCartClicked(this)">Añadir al carrito</button>   
 			</div>`
 			catalogo.appendChild(div)
 		}
@@ -81,61 +82,27 @@ function applyFilterName(){
     render(listaFiltradaPlay, 'productos');
 }
 
-// Filtrado por GENERO
-// DEPORTES
-function applyFilterSports(){
-    document.getElementById('productos').innerHTML = ''
-    const listaFiltradaSports = [];
-    const listaProductos = getListaProductosPlay();
-    for(let i = 0; i < listaProductos.length; i++){
-        let generoPlay = listaProductos[i].genero.search('deportes')
-        if(generoPlay != -1){
-            listaFiltradaSports.push(listaProductos[i]);
-        }
-        }
-        render(listaFiltradaSports, 'productos')
+// Filtrado por GENERO Start
+function getCountByCategory(sCategory) {
+    return listaProductos.filter(producto => producto.genero == sCategory);
 }
 
-// AVENTURA
-function applyFilterAdventure(){
-    document.getElementById('productos').innerHTML = ''
-    const listaFiltradaAdventure = [];
-    const listaProductos = getListaProductosPlay();
-    for(let i = 0; i < listaProductos.length; i++){
-        let generoPlay = listaProductos[i].genero.search('aventura')
-        if(generoPlay != -1){
-            listaFiltradaAdventure.push(listaProductos[i]);
-        }
-        }
-        render(listaFiltradaAdventure, 'productos')
-}
+const filtradoGeneroTerror = getCountByCategory('terror');
+const filtradoGeneroDeportes = getCountByCategory('deportes');
+const filtradoGeneroAccion = getCountByCategory('accion');
+const filtradoGeneroAventura = getCountByCategory('aventura');
 
-// TERROR
-function applyFilterTerror(){
+function applyFilterCategory(sCategory){
     document.getElementById('productos').innerHTML = ''
-    const listaFiltradaTerror = [];
+    const filterList = [];
     const listaProductos = getListaProductosPlay();
     for(let i = 0; i < listaProductos.length; i++){
-        let generoPlay = listaProductos[i].genero.search('terror')
+        let generoPlay = listaProductos[i].genero.search(sCategory)
         if(generoPlay != -1){
-            listaFiltradaTerror.push(listaProductos[i]);
+            filterList.push(listaProductos[i]);
         }
-        }
-        render(listaFiltradaTerror, 'productos')
-}
-
-// ACCION
-function applyFilterAction(){
-    document.getElementById('productos').innerHTML = ''
-    const listaFiltradaAccion = [];
-    const listaProductos = getListaProductosPlay();
-    for(let i = 0; i < listaProductos.length; i++){
-        let generoPlay = listaProductos[i].genero.search('accion')
-        if(generoPlay != -1){
-            listaFiltradaAccion.push(listaProductos[i]);
-        }
-        }
-        render(listaFiltradaAccion, 'productos')
+    }
+    render(filterList, 'productos')
 }
 
 
@@ -143,41 +110,45 @@ function applyRemoveFilters(){
     render(listaProductos, 'productos')
 }
 
-
-const filtradoGeneroTerror = listaProductos.filter(producto => producto.genero == 'terror');
-const filtradoGeneroDeportes = listaProductos.filter(producto => producto.genero == 'deportes');
-const filtradoGeneroAccion = listaProductos.filter(producto => producto.genero == 'accion');
-const filtradoGeneroAventura = listaProductos.filter(producto => producto.genero == 'aventura');
-
+// Filtrado por GENERO END
 
 const filtrado = document.getElementById('filterButtons').innerHTML = 
         `
         <div class="filterButton">
-            <button class="btn btn-outline-success" onclick="applyFilterSports()">Deportes (${filtradoGeneroDeportes.length})</button>
+            <button class="btn btn-outline-success" onclick="applyFilterCategory('deportes')">Deportes (${filtradoGeneroDeportes.length})</button>
         </div>
         <div class="filterButton">
-            <button class="btn btn-outline-success" onclick="applyFilterAdventure()">Aventura (${filtradoGeneroAventura.length})</button>
+            <button class="btn btn-outline-success" onclick="applyFilterCategory('aventura')">Aventura (${filtradoGeneroAventura.length})</button>
         </div>
         <div class="filterButton">
-            <button class="btn btn-outline-success" onclick="applyFilterTerror()">Terror (${filtradoGeneroTerror.length})</button>
+            <button class="btn btn-outline-success" onclick="applyFilterCategory('terror')">Terror (${filtradoGeneroTerror.length})</button>
         </div>
         <div class="filterButton">
-            <button class="btn btn-outline-success" onclick="applyFilterAction()">Accion (${filtradoGeneroAccion.length})</button>
+            <button class="btn btn-outline-success" onclick="applyFilterCategory('accion')">Accion (${filtradoGeneroAccion.length})</button>
         </div>
         <div class="filterButton">
             <button class="btn btn-outline-success" onclick="applyRemoveFilters()">Remover filtro</button>
         </div>
         `
 
-// ELECCIÓN DE PRODUCTO con EVENTO.
+
+// ELECCIÓN DE PRODUCTO y AGREGADO AL CARRITO.
+
+// Se añade un eventlistener que reaccione ante el click en un boton.
 const addtoCart = document.getElementsByClassName('botonCarrito');
 for (const boton of addtoCart){
     boton.addEventListener('click', addToCartClicked)
 }
+
+// hace un llamado al div con la clase shoppingCartItemsContainer que está en el HTML. 
 const shoppingCartItemsContainer = document.querySelector('.shoppingCartItemsContainer')
 
-function addToCartClicked(event){
-    const button = event.target;
+// hace llamado al botón comprar
+const comprarButton = document.getElementById('comprarButton')
+comprarButton.addEventListener('click', comprarButtonClicked())
+
+//funcion que  reune nombre, precio e imagen del producto elegido
+function addToCartClicked(button){
     const item = button.closest('.item')
     const itemTitle = item.querySelector('.name').textContent
     const itemPrice = item.querySelector('.precios').textContent
@@ -186,7 +157,23 @@ function addToCartClicked(event){
     addItemToShoppingCart(itemTitle, itemPrice, itemImage)
 }
 
+// generación de lo reunido en addToCartClicked a través de dom
 function addItemToShoppingCart(itemTitle, itemPrice, itemImage){
+    // evitar duplicado de productos en el carrito
+    const elementsTitle = shoppingCartItemsContainer.getElementsByClassName('shoppingCartItemTitle')
+    for(let i = 0; i < elementsTitle.length; i++){
+        if (elementsTitle[i].innerText === itemTitle){
+            // se utilizan 3 parent element para llegar hasta el div padre con class shoppingCartItem
+            let elementQuantity = elementsTitle[i].parentElement.parentElement.parentElement.querySelector('.shoppingCartItemQuantity')
+            // por cada vez que se toque el boton comprar, el input de cantidad va a subir uno más y se actualizará el valor total del carrito
+            elementQuantity.value++
+            updateShoppingCartTotal()
+            // el return hace que los elementos no se dupliquen
+            return;
+        }
+    }
+
+    // confeccion de los productos en el carrito
     const shoppingCartRow = document.createElement('div')
     const shoppingCartContent = `<div class="row shoppingCartItem">
     <div class="col-6">
@@ -212,11 +199,53 @@ function addItemToShoppingCart(itemTitle, itemPrice, itemImage){
     shoppingCartRow.innerHTML = shoppingCartContent
     shoppingCartItemsContainer.append(shoppingCartRow)
 
+    // activador de funcion para que el boton de eliminar producto funcione
+    shoppingCartRow.querySelector('.buttonDelete').addEventListener('click', removeShoppingCartItem)
+
+    
+    // activador de funcion para dar funcionalidad al input quantity
+    shoppingCartRow.querySelector('.shoppingCartItemQuantity').addEventListener('change', quantityChanged)
+
     updateShoppingCartTotal()
 }
 
+// actualizacion del total del carrito
 function updateShoppingCartTotal(){
     let total = 0;
     const shoppingCartTotal = document.querySelector('.shoppingCartTotal')
-    console.log(shoppingCartTotal)
+
+    const shoppingCartItems = document.querySelectorAll('.shoppingCartItem')
+
+    shoppingCartItems.forEach((shoppingCartItem) =>{
+        const shoppingCartItemPriceElement = shoppingCartItem.querySelector('.shoppingCartItemPrice')
+
+        // halla el elemento $ y lo elimina y el valor del precio lo pasa a numero con la funcion Number
+        const shoppingCartItemPrice = parseInt(shoppingCartItemPriceElement.textContent.replace('$', ''))
+
+        const shoppingCartItemQuantityElement = shoppingCartItem.querySelector('.shoppingCartItemQuantity')
+
+        const shoppingCartItemQuantity = parseInt(shoppingCartItemQuantityElement.value)
+
+        total = total + shoppingCartItemPrice * shoppingCartItemQuantity
+    })
+    shoppingCartTotal.innerHTML = `$ ${total}`
+}
+
+function removeShoppingCartItem(event){
+    const buttonClicked = event.target
+    buttonClicked.closest('.shoppingCartItem').remove()
+    updateShoppingCartTotal()
+}
+
+function quantityChanged(event){
+    const input = event.target
+    if (input.value <= 0){
+        input.value = 1
+    }
+    updateShoppingCartTotal()
+}
+
+function comprarButtonClicked(){
+    shoppingCartItemsContainer.innerHTML = ''
+    updateShoppingCartTotal()
 }
