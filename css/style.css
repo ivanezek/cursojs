@@ -147,6 +147,7 @@ i {
   gap: 20px;
 }
 #productos .item {
+  width: 165px;
   border: 1px solid #c8c7c7;
   margin-right: 16px;
   margin-bottom: 16px;

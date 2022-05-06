@@ -25,6 +25,7 @@
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
     .item{
+        width: 165px;
         border: 1px solid #c8c7c7;
         margin-right: $medium;
         margin-bottom: $medium;

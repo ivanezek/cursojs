@@ -112,10 +112,11 @@ function applyRemoveFilters(){
 
 // Filtrado por GENERO END
 
+// botones filtro aside
 const filtrado = document.getElementById('filterButtons').innerHTML = 
         `
         <div class="filterButton">
-            <button class="btn btn-outline-success" onclick="applyFilterCategory('deportes')">Deportes (${filtradoGeneroDeportes.length})</button>
+            <button class="btn btn-outline-success" onclick="applyFilterCategory('deportes')">Deportes 🏀  (${filtradoGeneroDeportes.length})</button>
         </div>
         <div class="filterButton">
             <button class="btn btn-outline-success" onclick="applyFilterCategory('aventura')">Aventura (${filtradoGeneroAventura.length})</button>
@@ -137,7 +138,17 @@ const filtrado = document.getElementById('filterButtons').innerHTML =
 // Se añade un eventlistener que reaccione ante el click en un boton.
 const addtoCart = document.getElementsByClassName('botonCarrito');
 for (const boton of addtoCart){
-    boton.addEventListener('click', addToCartClicked)
+    boton.addEventListener('click', () => {
+        Toastify({
+            text: "Producto agregado correctamente!",
+            duration: 3000,
+            gravity: 'top',
+            style: {
+                background: "green",
+              },
+            position: 'left',
+        }).showToast();
+    }, addToCartClicked)
 }
 
 // hace un llamado al div con la clase shoppingCartItemsContainer que está en el HTML. 
@@ -145,7 +156,17 @@ const shoppingCartItemsContainer = document.querySelector('.shoppingCartItemsCon
 
 // hace llamado al botón comprar
 const comprarButton = document.getElementById('comprarButton')
-comprarButton.addEventListener('click', comprarButtonClicked())
+comprarButton.addEventListener('click', () => {
+    Toastify({
+        text: "Redirigiendo hacia el formulario de compra...",
+        duration: 3000,
+        gravity: 'top',
+        position: 'left',
+        style: {
+            background: "yellow",
+          },
+    }).showToast();
+}, comprarButtonClicked())
 
 //funcion que  reune nombre, precio e imagen del producto elegido
 function addToCartClicked(button){
@@ -153,6 +174,8 @@ function addToCartClicked(button){
     const itemTitle = item.querySelector('.name').textContent
     const itemPrice = item.querySelector('.precios').textContent
     const itemImage = item.querySelector('.img').src
+
+
 
     addItemToShoppingCart(itemTitle, itemPrice, itemImage)
 }
