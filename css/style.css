@@ -35,6 +35,31 @@ nav {
   border-bottom: 1px solid;
 }
 
+.cart {
+  height: 40px;
+  width: 40px;
+}
+
+.cart-products {
+  border: 2px solid red;
+  position: absolute !important;
+  top: 82px;
+  right: -18px;
+  background-color: #fff;
+  padding: 0 18px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  min-width: 290px;
+  margin-right: 20px;
+}
+
+p.close-btn {
+  top: -4px;
+  right: 6px;
+  cursor: pointer;
+  color: #000;
+}
+
 footer {
   word-spacing: 10px;
   text-align: center;

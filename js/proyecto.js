@@ -23,6 +23,37 @@ function getListaProductosPlay() {
 const listaProductos = getListaProductosPlay()
 const guardarLocal = (clave, valor) => { localStorage.setItem(clave, valor) };
 
+
+listaDom = document.getElementById('productos')
+
+const listaProductosFetch = async () => {
+    const resp = await fetch('/js/api.json')
+    const data = await resp.json()
+    html = ''
+    data.forEach(producto => {
+        html += `
+			<div class="item-img">
+				<img class="img" src='${producto.img}' alt="${producto.name}">
+			</div>
+			<div class="item-name">
+				<h2 class="name">${producto.name}</h2>
+			</div>
+			<div class="item-price">
+			    <p class='precios'>${producto.price} ARS</p>
+			</div>
+			<div class="item-button">
+				<button class='btn btn-dark botonCarrito' id='idJuego-${producto.id}' onclick="addToCartClicked(this)">Añadir al carrito</button>   
+			</div>`
+    })
+    listaDom.innerHTML = html
+}
+
+listaProductosFetch()
+
+
+
+
+
 guardarLocal("listaProductos", JSON.stringify(listaProductos));
 
 
@@ -152,7 +183,8 @@ for (const boton of addtoCart){
 }
 
 // hace un llamado al div con la clase shoppingCartItemsContainer que está en el HTML. 
-const shoppingCartItemsContainer = document.querySelector('.shoppingCartItemsContainer')
+
+const shoppingCartItemsContainer = document.querySelector('.shoppingCartItemTitle')
 
 // hace llamado al botón comprar
 const comprarButton = document.getElementById('comprarButton')
@@ -229,6 +261,7 @@ function addItemToShoppingCart(itemTitle, itemPrice, itemImage){
     // activador de funcion para dar funcionalidad al input quantity
     shoppingCartRow.querySelector('.shoppingCartItemQuantity').addEventListener('change', quantityChanged)
 
+
     updateShoppingCartTotal()
 }
 
@@ -271,4 +304,14 @@ function quantityChanged(event){
 function comprarButtonClicked(){
     shoppingCartItemsContainer.innerHTML = ''
     updateShoppingCartTotal()
+}
+
+
+
+function showCart(x){
+    document.getElementById("products-id").style.display = "block";
+}
+
+function closeBtn(){
+    document.getElementById("products-id").style.display = "none";
 }

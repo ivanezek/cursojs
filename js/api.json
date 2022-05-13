@@ -1,10 +1,18 @@
 [
-    {"id": 1, "name": "Assassins Creed: Origins", "price": 6900, "img": "assets/ac_origins.jpg"},
-    {"id": 2, "name": "Resident Evil: Biohazard", "price": 2800, "img": "assets/re7.jpg"},
-    {"id": 3, "name": "Red Dead Redemption", "price": 1500, "img": "assets/rdr.jpg"},
-    {"id": 4, "name": "Batman: Arkham Knight", "price": 1200, "img": "assets/batman_arkham.jpg"},
-    {"id": 5, "name": "FIFA 22", "price": 7500, "img": "assets/fifa.jpg"},
-    {"id": 6, "name": "The Last Of Us: Part 2", "price": 1300, "img": "assets/tlou_2.png"},
-    {"id": 7, "name": "Cyberpunk 2077", "price": 6000, "img": "assets/cyberp.jpg"},
-    {"id": 8, "name": "NBA 2k19", "price": 900, "img": "assets/nba.jpg"}
+    {"id": 1, "name": "Assassins Creed: Origins", "price": 6900, "genero": "aventura", "img": "assets/ac_origins.jpg"},
+    {"id": 2, "name": "Resident Evil: Biohazard", "price": 2800, "genero": "terror", "img": "assets/re7.jpg"},
+    {"id": 3, "name": "Red Dead Redemption", "price": 1500, "genero": "accion", "img": "assets/rdr.jpg"},
+    {"id": 4, "name": "Batman: Arkham Knight", "price": 1200, "genero": "accion", "img": "assets/batman_arkham.jpg"},
+    {"id": 5, "name": "FIFA 22", "price": 7500, "genero": "deportes", "img": "assets/fifa.jpg"},
+    {"id": 6, "name": "The Last Of Us: Part 2", "price": 1300, "genero": "terror", "img": "assets/tlou_2.png"},
+    {"id": 7, "name": "Cyberpunk 2077", "price": 6000, "genero": "aventura", "img": "assets/cyberp.jpg"},
+    {"id": 8, "name": "GTA V", "price": 2235, "genero": "accion", "img": "assets/gta5.jpg"},
+    {"id": 9, "name": "God of War", "price": 1000, "genero": "aventura", "img": "assets/gow.jpg"},
+    {"id": 10, "name": "Marvel Spider-Man", "price": 3896, "genero": "aventura", "img": "assets/marvelSpiderman.jpg"},
+    {"id": 11, "name": "UFC 3", "price": 1180, "genero": "deportes", "img": "assets/ufc3.jpg"},
+    {"id": 12, "name": "Tennis World Tour", "price": 3450, "genero": "deportes", "img": "assets/tenniswt.jpg"},
+    {"id": 13, "name": "Outlast 2", "price": 2900, "genero": "terror", "img": "assets/outlast2.jpg"},
+    {"id": 14, "name": "Until Dawn", "price": 1045, "genero": "terror", "img": "assets/untildawn.webp"},
+    {"id": 15, "name": "Star Wars: Jedi Fallen Order", "price": 1420, "genero": "aventura", "img": "assets/sw_jfo.jpg"},
+    {"id": 16, "name": "Mafia III", "price": 3100, "genero": "accion", "img": "assets/mafia3.webp"}
 ]
