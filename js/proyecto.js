@@ -1,5 +1,8 @@
-// PRODUCTOS
-function getListaProductosPlay() {
+// guarda en localstore
+const guardarLocal = (clave, valor) => { localStorage.setItem(clave, valor) };
+
+// recupera listado desde array
+function getListaProductosPlay2() {
     return [
         {id: 1, name: "Assassins Creed: Origins", price: 6900, genero:"aventura", img: 'assets/ac_origins.jpg'},
         {id: 2, name: "Resident Evil: Biohazard", price: 2800, genero:"terror", img: 'assets/re7.jpg'},
@@ -18,37 +21,29 @@ function getListaProductosPlay() {
         {id: 15, name: "Star Wars: Jedi Fallen Order", price: 1420, genero: "aventura", img: 'assets/sw_jfo.jpg'},
         {id: 16, name: "Mafia III", price: 3100, genero: "accion", img: 'assets/mafia3.webp'},
     ]
+    render(listaProductos, 'productos');
 }
+// const listaProductos = getListaProductosPlay();
 
-const listaProductos = getListaProductosPlay()
-const guardarLocal = (clave, valor) => { localStorage.setItem(clave, valor) };
-
-
-listaDom = document.getElementById('productos')
-
+// recupera listado desde json
+var listaProductos = [];
 const listaProductosFetch = async () => {
-    const resp = await fetch('/js/api.json')
-    const data = await resp.json()
-    html = ''
-    data.forEach(producto => {
-        html += `
-			<div class="item-img">
-				<img class="img" src='${producto.img}' alt="${producto.name}">
-			</div>
-			<div class="item-name">
-				<h2 class="name">${producto.name}</h2>
-			</div>
-			<div class="item-price">
-			    <p class='precios'>${producto.price} ARS</p>
-			</div>
-			<div class="item-button">
-				<button class='btn btn-dark botonCarrito' id='idJuego-${producto.id}' onclick="addToCartClicked(this)">Añadir al carrito</button>   
-			</div>`
-    })
-    listaDom.innerHTML = html
+    const resp = await fetch('js/api.json');
+    listaProductos = await resp.json();
+    render(listaProductos, 'productos');
 }
+listaProductosFetch();
 
-listaProductosFetch()
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -80,24 +75,27 @@ function render(aProductos, divProductos) {
 			<div class="item-button">
 				<button class='btn btn-dark botonCarrito' id='idJuego-${producto.id}' onclick="addToCartClicked(this)">Añadir al carrito</button>   
 			</div>`
-			catalogo.appendChild(div)
-		}
-		return
-	}
+        catalogo.appendChild(div)
+    }
+    renderFiltrosCategorias(aProductos);
+    return;
+}
 
-render(listaProductos, 'productos')
+
+
+
+
+
 
 // BUSQUEDA DE PRODUCTO con EVENTO.
-function applyFilterName(){
+function applyFilterName() {
     // recupero valor del input y lo transformo en minuscula
     const filtroName = document.getElementById('valorName').value.toLowerCase();
     // limpio el contenedor de la grilla
     document.getElementById('productos').innerHTML = '';
     // genero un array vacío para encontrar el/los elementos filtrados
     const listaFiltradaPlay = [];
-    // recupero mi array original
-    const listaProductos = getListaProductosPlay();
-    // aplicación de for para encontrar el elemento
+    // recupero mi array original y aplica for para encontrar el elemento
     for (let i = 0; i < listaProductos.length; i++) {
         // comparo con la funcion search que devuelve la posicion si encuentra el string a buscar
         let positionPlay = listaProductos[i].name.toLowerCase().search(filtroName);
@@ -113,20 +111,58 @@ function applyFilterName(){
     render(listaFiltradaPlay, 'productos');
 }
 
+
 // Filtrado por GENERO Start
-function getCountByCategory(sCategory) {
-    return listaProductos.filter(producto => producto.genero == sCategory);
+function getCountByCategory(aProductos, sCategory) {
+    return aProductos.filter(producto => producto.genero == sCategory);
 }
 
-const filtradoGeneroTerror = getCountByCategory('terror');
-const filtradoGeneroDeportes = getCountByCategory('deportes');
-const filtradoGeneroAccion = getCountByCategory('accion');
-const filtradoGeneroAventura = getCountByCategory('aventura');
 
+// RENDER de filtros 
+function renderFiltrosCategorias(aProductos) {
+    const filtradoGeneroTerror = getCountByCategory(aProductos, 'terror');
+    const filtradoGeneroDeportes = getCountByCategory(aProductos, 'deportes');
+    const filtradoGeneroAccion = getCountByCategory(aProductos, 'accion');
+    const filtradoGeneroAventura = getCountByCategory(aProductos, 'aventura');
+
+    let filtro_html = '';
+    if (filtradoGeneroDeportes.length > 0) {
+        filtro_html += `<div class="filterButton">
+                                        <button class="btn btn-outline-success" onclick="applyFilterCategory('deportes')">Deportes 🏀  (${filtradoGeneroDeportes.length})</button>
+                                    </div>`;
+    }
+
+    if(filtradoGeneroAventura.length > 0){
+        filtro_html += `<div class="filterButton">
+        <button class="btn btn-outline-success" onclick="applyFilterCategory('aventura')">Aventura (${filtradoGeneroAventura.length})</button>
+    </div>`
+    }
+
+    if(filtradoGeneroTerror.length > 0){
+        filtro_html += `<div class="filterButton">
+        <button class="btn btn-outline-success" onclick="applyFilterCategory('terror')">Terror (${filtradoGeneroTerror.length})</button>
+    </div>`
+    }
+
+    if(filtradoGeneroAccion.length > 0){
+        filtro_html += `<div class="filterButton">
+        <button class="btn btn-outline-success" onclick="applyFilterCategory('accion')">Accion (${filtradoGeneroAccion.length})</button>
+    </div>`
+    }
+
+    filtro_html +=  
+        `   
+        <div class="filterButton">
+            <button class="btn btn-outline-success" onclick="applyRemoveFilters()">Remover filtro</button>
+        </div>`;
+    document.getElementById('filterButtons').innerHTML = filtro_html;
+}
+
+// 
 function applyFilterCategory(sCategory){
     document.getElementById('productos').innerHTML = ''
     const filterList = [];
-    const listaProductos = getListaProductosPlay();
+    //const listaProductos = getListaProductosPlay();
     for(let i = 0; i < listaProductos.length; i++){
         let generoPlay = listaProductos[i].genero.search(sCategory)
         if(generoPlay != -1){
@@ -136,32 +172,19 @@ function applyFilterCategory(sCategory){
     render(filterList, 'productos')
 }
 
-
+// 
 function applyRemoveFilters(){
     render(listaProductos, 'productos')
 }
 
+
+
+
 // Filtrado por GENERO END
 
 // botones filtro aside
-const filtrado = document.getElementById('filterButtons').innerHTML = 
-        `
-        <div class="filterButton">
-            <button class="btn btn-outline-success" onclick="applyFilterCategory('deportes')">Deportes 🏀  (${filtradoGeneroDeportes.length})</button>
-        </div>
-        <div class="filterButton">
-            <button class="btn btn-outline-success" onclick="applyFilterCategory('aventura')">Aventura (${filtradoGeneroAventura.length})</button>
-        </div>
-        <div class="filterButton">
-            <button class="btn btn-outline-success" onclick="applyFilterCategory('terror')">Terror (${filtradoGeneroTerror.length})</button>
-        </div>
-        <div class="filterButton">
-            <button class="btn btn-outline-success" onclick="applyFilterCategory('accion')">Accion (${filtradoGeneroAccion.length})</button>
-        </div>
-        <div class="filterButton">
-            <button class="btn btn-outline-success" onclick="applyRemoveFilters()">Remover filtro</button>
-        </div>
-        `
+function renderFiltros() {
+}
 
 
 // ELECCIÓN DE PRODUCTO y AGREGADO AL CARRITO.
@@ -188,6 +211,7 @@ const shoppingCartItemsContainer = document.querySelector('.shoppingCartItemTitl
 
 // hace llamado al botón comprar
 const comprarButton = document.getElementById('comprarButton')
+/*
 comprarButton.addEventListener('click', () => {
     Toastify({
         text: "Redirigiendo hacia el formulario de compra...",
@@ -199,6 +223,7 @@ comprarButton.addEventListener('click', () => {
           },
     }).showToast();
 }, comprarButtonClicked())
+*/
 
 //funcion que  reune nombre, precio e imagen del producto elegido
 function addToCartClicked(button){
